@@ -1,4 +1,6 @@
+/home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/exception/MgsException.java
 /home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/MgsApi.java
 /home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/repository/ConsumerRepository.java
 /home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/entity/Consumer.java
 /home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/controller/MgsController.java
+/home/ademir/Workspace/source/mgs-api/src/main/java/com/mgs/enums/ExceptionEnum.java

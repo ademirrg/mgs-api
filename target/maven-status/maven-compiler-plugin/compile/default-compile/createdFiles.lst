@@ -1,4 +1,6 @@
 com/mgs/controller/MgsController.class
 com/mgs/entity/Consumer.class
 com/mgs/MgsApi.class
+com/mgs/exception/MgsException.class
 com/mgs/repository/ConsumerRepository.class
+com/mgs/enums/ExceptionEnum.class

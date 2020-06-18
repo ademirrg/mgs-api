@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/mgs")
@@ -36,7 +38,7 @@ public class MgsController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Consumer> createConsumer(@RequestBody Consumer consumer) {
+    private ResponseEntity<Consumer> createConsumer(@Valid @RequestBody Consumer consumer) {
         if(consumer == null) {
             return ResponseEntity.notFound().build();
         }
@@ -44,7 +46,7 @@ public class MgsController {
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<Consumer> updateConsumer(@PathVariable Long id, @RequestBody Consumer consumer) {
+    private ResponseEntity<Consumer> updateConsumer(@Valid @PathVariable Long id, @RequestBody Consumer consumer) {
         if(!consumerRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
