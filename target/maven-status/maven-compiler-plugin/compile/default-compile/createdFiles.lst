@@ -1,0 +1,4 @@
+com/mgs/controller/MgsController.class
+com/mgs/MgsApi.class
+com/mgs/entity/Cliente.class
+com/mgs/repository/ClienteRepository.class
