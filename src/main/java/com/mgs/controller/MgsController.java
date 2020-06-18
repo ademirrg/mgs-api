@@ -45,7 +45,7 @@ public class MgsController {
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<Consumer> updateConsumer(@Valid @PathVariable Long id, @RequestBody Consumer consumer) {
+    private ResponseEntity<Consumer> updateConsumer(@PathVariable Long id, @Valid @RequestBody Consumer consumer) {
         if(!consumerRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
