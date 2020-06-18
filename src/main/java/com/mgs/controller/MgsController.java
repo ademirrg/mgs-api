@@ -18,11 +18,10 @@ public class MgsController {
 
     @GetMapping("{id}")
     private ResponseEntity<Consumer> findById(@PathVariable Long id) {
-        Consumer consumer = consumerRepository.findById(id).orElse(null);
-        if (consumer == null) {
+        if (!consumerRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumer);
+        return ResponseEntity.ok(consumerRepository.findById(id).orElse(null));
     }
 
     @GetMapping("/name/{name}")
@@ -37,11 +36,29 @@ public class MgsController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Consumer> createCliente(@RequestBody Consumer consumer) {
-        if(consumer.getName() == null) {
+    private ResponseEntity<Consumer> createConsumer(@RequestBody Consumer consumer) {
+        if(consumer == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(consumerRepository.save(consumer));
+    }
+
+    @PutMapping("/update/{id}")
+    private ResponseEntity<Consumer> updateConsumer(@PathVariable Long id, @RequestBody Consumer consumer) {
+        if(!consumerRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        consumer.setId(id);
+        return ResponseEntity.ok(consumerRepository.save(consumer));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<Consumer> deleteConsumer(@PathVariable Long id) {
+        if(!consumerRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        consumerRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
