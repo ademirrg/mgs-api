@@ -1,7 +1,7 @@
 package com.mgs.controller;
 
-import com.mgs.entity.Cliente;
-import com.mgs.repository.ClienteRepository;
+import com.mgs.entity.Consumer;
+import com.mgs.repository.ConsumerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,34 +14,34 @@ import java.util.List;
 public class MgsController {
 
     @Autowired
-    ClienteRepository clienteRepository;
+    ConsumerRepository consumerRepository;
 
     @GetMapping("{id}")
-    private ResponseEntity<Cliente> findById(@PathVariable Long id) {
-        Cliente cliente = clienteRepository.findById(id).orElse(null);
-        if (cliente == null) {
+    private ResponseEntity<Consumer> findById(@PathVariable Long id) {
+        Consumer consumer = consumerRepository.findById(id).orElse(null);
+        if (consumer == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(consumer);
     }
 
     @GetMapping("/name/{name}")
     private ResponseEntity<List> findByName(@PathVariable String name) {
-        List<Cliente> clientes = clienteRepository.findByName(name);
+        List<Consumer> consumers = consumerRepository.findByName(name);
 
-        if (clientes.isEmpty()) {
+        if (consumers.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(clientes);
+        return ResponseEntity.ok(consumers);
     }
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
-        if(cliente.getName() == null) {
+    private ResponseEntity<Consumer> createCliente(@RequestBody Consumer consumer) {
+        if(consumer.getName() == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(clienteRepository.save(cliente));
+        return ResponseEntity.ok(consumerRepository.save(consumer));
     }
 
 }

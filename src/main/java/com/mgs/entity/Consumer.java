@@ -4,10 +4,10 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "cliente")
+@Entity(name = "consumer")
 @Getter
 @Setter
-public class Cliente {
+public class Consumer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
