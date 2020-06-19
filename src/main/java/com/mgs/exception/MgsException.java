@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -26,5 +27,11 @@ public class MgsException extends ResponseEntityExceptionHandler {
             fields.add(message);
         }
         return super.handleExceptionInternal(ex, ExceptionEnum.VALID_FIELDS.getMessage() + fields, headers, status, request);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    protected ResponseEntity<Object> handlerBusinessException (BusinessException ex, WebRequest request) {
+        var status = HttpStatus.BAD_REQUEST;
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), status, request);
     }
 }

@@ -13,7 +13,7 @@
 
     <groupId>com.mgs</groupId>
     <artifactId>mgs-api</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
     <description>API MGS</description>
 
     <properties>

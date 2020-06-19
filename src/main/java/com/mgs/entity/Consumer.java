@@ -38,7 +38,7 @@ public class Consumer extends BaseAuditEntity {
     @Size(max = 200)
     private String address;
 
-    @Column
+    @Column(name = "email")
     @NotBlank
     @Size(max = 50)
     @Email
@@ -47,4 +47,9 @@ public class Consumer extends BaseAuditEntity {
     @Column
     @Size(max = 200)
     private String complement;
+
+    @Column(updatable = false)
+    @NotBlank
+    @Size(max = 20)
+    private String cpf;
 }

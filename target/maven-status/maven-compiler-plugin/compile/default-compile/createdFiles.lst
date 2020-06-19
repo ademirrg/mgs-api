@@ -1,5 +1,6 @@
 com/mgs/business/ConsumerBusiness.class
 com/mgs/exception/MgsException.class
+com/mgs/exception/BusinessException.class
 com/mgs/repository/ConsumerRepository.class
 com/mgs/enums/ExceptionEnum.class
 com/mgs/controller/MgsController.class
