@@ -30,7 +30,7 @@ public class MgsException extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    protected ResponseEntity<Object> handlerBusinessException (BusinessException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleBusinessException (BusinessException ex, WebRequest request) {
         var status = HttpStatus.BAD_REQUEST;
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), status, request);
     }
