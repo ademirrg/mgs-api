@@ -1,6 +1,11 @@
-com/mgs/controller/MgsController.class
-com/mgs/entity/Consumer.class
-com/mgs/MgsApi.class
+com/mgs/business/ConsumerBusiness.class
 com/mgs/exception/MgsException.class
 com/mgs/repository/ConsumerRepository.class
 com/mgs/enums/ExceptionEnum.class
+com/mgs/controller/MgsController.class
+com/mgs/entity/Consumer.class
+com/mgs/MgsApi.class
+com/mgs/entity/BaseAuditEntity.class
+com/mgs/business/businessImpl/ConsumerBusinessImpl.class
+com/mgs/entity/BaseEntity.class
+com/mgs/config/JpaAuditingConfiguration.class

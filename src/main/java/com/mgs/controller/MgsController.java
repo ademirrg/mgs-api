@@ -1,8 +1,10 @@
 package com.mgs.controller;
 
+import com.mgs.business.ConsumerBusiness;
 import com.mgs.entity.Consumer;
 import com.mgs.repository.ConsumerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +16,20 @@ import java.util.List;
 @RequestMapping("/mgs")
 public class MgsController {
 
-    @Autowired
-    ConsumerRepository consumerRepository;
+    @Autowired @Lazy
+    ConsumerBusiness consumerBusiness;
 
     @GetMapping("{id}")
     private ResponseEntity<Consumer> findById(@PathVariable Long id) {
-        if (!consumerRepository.existsById(id)) {
+        if (!consumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumerRepository.findById(id).orElse(null));
+        return ResponseEntity.ok(consumerBusiness.findById(id));
     }
 
     @GetMapping("/name/{name}")
     private ResponseEntity<List> findByName(@PathVariable String name) {
-        List<Consumer> consumers = consumerRepository.findByName(name);
+        List<Consumer> consumers = consumerBusiness.findByName(name);
 
         if (consumers.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -41,24 +43,24 @@ public class MgsController {
         if(consumer == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumerRepository.save(consumer));
+        return ResponseEntity.ok(consumerBusiness.save(consumer));
     }
 
     @PutMapping("/update/{id}")
     private ResponseEntity<Consumer> updateConsumer(@PathVariable Long id, @Valid @RequestBody Consumer consumer) {
-        if(!consumerRepository.existsById(id)) {
+        if(!consumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         consumer.setId(id);
-        return ResponseEntity.ok(consumerRepository.save(consumer));
+        return ResponseEntity.ok(consumerBusiness.save(consumer));
     }
 
     @DeleteMapping("/delete/{id}")
     private ResponseEntity<Consumer> deleteConsumer(@PathVariable Long id) {
-        if(!consumerRepository.existsById(id)) {
+        if(!consumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        consumerRepository.deleteById(id);
+        consumerBusiness.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
