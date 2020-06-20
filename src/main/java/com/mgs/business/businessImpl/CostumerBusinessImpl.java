@@ -6,6 +6,7 @@ import com.mgs.entity.Costumer;
 import com.mgs.enums.ExceptionEnum;
 import com.mgs.exception.BusinessException;
 import com.mgs.repository.CostumerRepository;
+import com.mgs.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class CostumerBusinessImpl implements CostumerBusiness {
     }
 
     public CostumerDTO save(CostumerDTO costumerDTO) {
-        Costumer person = costumerRepository.findByCpf(costumerDTO.getCpf());
+        Costumer person = costumerRepository.findByCpf(StringUtils.removeMask(costumerDTO.getCpf()));
         if(isOtherPerson(person, costumerDTO)) {
             throw new BusinessException(ExceptionEnum.CPF_ALREADY_EXIST.getMessage());
         }
@@ -47,6 +48,7 @@ public class CostumerBusinessImpl implements CostumerBusiness {
             throw new BusinessException(ExceptionEnum.EMAIL_ALREADY_EXIST.getMessage());
         }
         Costumer costumer = mapper.map(costumerDTO, Costumer.class);
+        costumer.setCpf(StringUtils.removeMask(costumer.getCpf()));
         return mapper.map(costumerRepository.save(costumer), CostumerDTO.class);
     }
 

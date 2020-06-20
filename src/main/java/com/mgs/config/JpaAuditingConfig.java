@@ -13,7 +13,7 @@ public class JpaAuditingConfig {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return () -> Optional.ofNullable("sys");
+        return () -> Optional.ofNullable("system");
     }
 
 }

@@ -1,3 +1,4 @@
+com/mgs/utils/StringUtils.class
 com/mgs/business/CostumerBusiness.class
 com/mgs/exception/MgsException.class
 com/mgs/exception/BusinessException.class
