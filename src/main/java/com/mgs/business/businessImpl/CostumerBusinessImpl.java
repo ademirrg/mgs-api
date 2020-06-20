@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,13 +38,13 @@ public class CostumerBusinessImpl implements CostumerBusiness {
     }
 
     public CostumerDTO save(CostumerDTO costumerDTO) {
-        Costumer person = costumerRepository.findByEmail(costumerDTO.getEmail());
-        if(person != null && !person.getId().equals(costumerDTO.getId())) {
-            throw new BusinessException(ExceptionEnum.EMAIL_ALREADY_EXIST.getMessage());
-        }
-        person = costumerRepository.findByCpf(costumerDTO.getCpf());
-        if(person != null && !person.getId().equals(costumerDTO.getId())) {
+        Costumer person = costumerRepository.findByCpf(costumerDTO.getCpf());
+        if(isOtherPerson(person, costumerDTO)) {
             throw new BusinessException(ExceptionEnum.CPF_ALREADY_EXIST.getMessage());
+        }
+        person = costumerRepository.findByEmail(costumerDTO.getEmail());
+        if(isOtherPerson(person, costumerDTO)) {
+            throw new BusinessException(ExceptionEnum.EMAIL_ALREADY_EXIST.getMessage());
         }
         Costumer costumer = mapper.map(costumerDTO, Costumer.class);
         return mapper.map(costumerRepository.save(costumer), CostumerDTO.class);
@@ -53,5 +52,9 @@ public class CostumerBusinessImpl implements CostumerBusiness {
 
     public void deleteById(Long id) {
         costumerRepository.deleteById(id);
+    }
+
+    public boolean isOtherPerson(Costumer person, CostumerDTO costumerDTO) {
+        return person != null && !person.getId().equals(costumerDTO.getId());
     }
 }
