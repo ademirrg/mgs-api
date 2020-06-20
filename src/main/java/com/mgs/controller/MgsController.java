@@ -1,7 +1,7 @@
 package com.mgs.controller;
 
-import com.mgs.business.ConsumerBusiness;
-import com.mgs.dto.ConsumerDTO;
+import com.mgs.business.CostumerBusiness;
+import com.mgs.dto.CostumerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -16,19 +16,19 @@ import java.util.List;
 public class MgsController {
 
     @Autowired @Lazy
-    ConsumerBusiness consumerBusiness;
+    CostumerBusiness costumerBusiness;
 
     @GetMapping("{id}")
-    private ResponseEntity<ConsumerDTO> findById(@PathVariable Long id) {
-        if (!consumerBusiness.existsById(id)) {
+    private ResponseEntity<CostumerDTO> findById(@PathVariable Long id) {
+        if (!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumerBusiness.findById(id));
+        return ResponseEntity.ok(costumerBusiness.findById(id));
     }
 
     @GetMapping("/name/{name}")
     private ResponseEntity<List> findByName(@PathVariable String name) {
-        List<ConsumerDTO> consumersDTO = consumerBusiness.findByName(name);
+        List<CostumerDTO> consumersDTO = costumerBusiness.findByName(name);
 
         if (consumersDTO.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -38,28 +38,28 @@ public class MgsController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<ConsumerDTO> createConsumer(@Valid @RequestBody ConsumerDTO consumerDTO) {
-        if(consumerDTO == null) {
+    private ResponseEntity<CostumerDTO> createConsumer(@Valid @RequestBody CostumerDTO costumerDTO) {
+        if(costumerDTO == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumerBusiness.save(consumerDTO));
+        return ResponseEntity.ok(costumerBusiness.save(costumerDTO));
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<ConsumerDTO> updateConsumer(@PathVariable Long id, @Valid @RequestBody ConsumerDTO consumerDTO) {
-        if(!consumerBusiness.existsById(id)) {
+    private ResponseEntity<CostumerDTO> updateConsumer(@PathVariable Long id, @Valid @RequestBody CostumerDTO costumerDTO) {
+        if(!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        consumerDTO.setId(id);
-        return ResponseEntity.ok(consumerBusiness.save(consumerDTO));
+        costumerDTO.setId(id);
+        return ResponseEntity.ok(costumerBusiness.save(costumerDTO));
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<ConsumerDTO> deleteConsumer(@PathVariable Long id) {
-        if(!consumerBusiness.existsById(id)) {
+    private ResponseEntity<CostumerDTO> deleteConsumer(@PathVariable Long id) {
+        if(!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        consumerBusiness.deleteById(id);
+        costumerBusiness.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
