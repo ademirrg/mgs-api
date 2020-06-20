@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CostumerBusinessImpl implements CostumerBusiness {
@@ -32,11 +33,9 @@ public class CostumerBusinessImpl implements CostumerBusiness {
 
     public List<CostumerDTO> findByName(String name) {
         List<Costumer> costumers = costumerRepository.findByName(name);
-        List<CostumerDTO> costumerDTO = new ArrayList<>();
-        for(var costumer : costumers) {
-            costumerDTO.add(mapper.map(costumer, CostumerDTO.class));
-        }
-        return costumerDTO;
+        return costumers.stream()
+                .map(costumer -> mapper.map(costumer, CostumerDTO.class))
+                .collect(Collectors.toList());
     }
 
     public CostumerDTO save(CostumerDTO costumerDTO) {
