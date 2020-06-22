@@ -1,4 +1,4 @@
-alter table consumer add (
+alter table costumer add (
 dt_create timestamp null,
 user_create varchar(255),
 dt_modify timestamp null,

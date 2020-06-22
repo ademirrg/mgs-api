@@ -28,17 +28,17 @@ public class MgsController {
 
     @GetMapping("/name/{name}")
     private ResponseEntity<List> findByName(@PathVariable String name) {
-        List<CostumerDTO> consumersDTO = costumerBusiness.findByName(name);
+        List<CostumerDTO> costumersDTO = costumerBusiness.findByName(name);
 
-        if (consumersDTO.isEmpty()) {
+        if (costumersDTO.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(consumersDTO);
+        return ResponseEntity.ok(costumersDTO);
     }
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<CostumerDTO> createConsumer(@Valid @RequestBody CostumerDTO costumerDTO) {
+    private ResponseEntity<CostumerDTO> createCostumer(@Valid @RequestBody CostumerDTO costumerDTO) {
         if(costumerDTO == null) {
             return ResponseEntity.notFound().build();
         }
@@ -46,7 +46,7 @@ public class MgsController {
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<CostumerDTO> updateConsumer(@PathVariable Long id, @Valid @RequestBody CostumerDTO costumerDTO) {
+    private ResponseEntity<CostumerDTO> updateCostumer(@PathVariable Long id, @Valid @RequestBody CostumerDTO costumerDTO) {
         if(!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -55,7 +55,7 @@ public class MgsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<CostumerDTO> deleteConsumer(@PathVariable Long id) {
+    private ResponseEntity<CostumerDTO> deleteCostumer(@PathVariable Long id) {
         if(!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
