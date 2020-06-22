@@ -27,11 +27,11 @@ public abstract class BaseAuditEntity implements BaseEntity {
     @CreatedBy
     private String userCreate;
 
-    @Column
+    @Column(insertable = false)
     @LastModifiedDate
     private LocalDateTime dtModify;
 
-    @Column
+    @Column(insertable = false)
     @LastModifiedBy
     private String userModify;
 }

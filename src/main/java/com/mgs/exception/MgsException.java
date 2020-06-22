@@ -22,7 +22,7 @@ public class MgsException extends ResponseEntityExceptionHandler {
         var fields = new ArrayList<>();
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             String field = ((FieldError) error).getField();
-            String message = ((FieldError) error).getDefaultMessage();
+            String message = error.getDefaultMessage();
             fields.add(field);
             fields.add(message);
         }
