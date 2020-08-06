@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +28,8 @@ public class CostumerBusinessImpl implements CostumerBusiness {
         return costumerRepository.existsById(id);
     }
 
-    public CostumerDTO findById(Long id) {
-        return mapper.map(costumerRepository.findById(id), CostumerDTO.class);
+    public Optional<CostumerDTO> findById(Long id) {
+        return costumerRepository.findById(id).map(f -> mapper.map(f, CostumerDTO.class));
     }
 
     public List<CostumerDTO> findByName(String name) {

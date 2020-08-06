@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/mgs")
@@ -18,8 +19,8 @@ public class MgsController {
     @Autowired @Lazy
     CostumerBusiness costumerBusiness;
 
-    @GetMapping("{id}")
-    private ResponseEntity<CostumerDTO> findById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    private ResponseEntity<Optional<CostumerDTO>> findById(@PathVariable Long id) {
         if (!costumerBusiness.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
